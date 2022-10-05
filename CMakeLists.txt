@@ -21,4 +21,16 @@ list(POP_BACK CMAKE_MESSAGE_INDENT)
 
 add_subdirectory(src bin)
 
-install(TARGETS demo demolib demolib_static demolib_shared)
+install(TARGETS
+    c-demo-objfiles
+    c-demo-static
+    c-demo-shared
+    demolib
+    demolib_static
+    demolib_shared
+    cpp-demo-objfiles
+    cpp-demo-static
+    cpp-demo-shared
+    democpplib
+    democpplib_static
+    democpplib_shared)

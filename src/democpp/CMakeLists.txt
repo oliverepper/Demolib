@@ -1,0 +1,21 @@
+add_library(democpplib OBJECT demo.cpp $<TARGET_OBJECTS:demolib>)
+
+target_include_directories(democpplib PUBLIC include)
+
+set_target_properties(democpplib PROPERTIES
+    PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/include/demo.hpp"
+    POSITION_INDEPENDENT_CODE true)
+
+target_link_libraries(democpplib PUBLIC demolib_static)
+
+add_library(democpplib_static STATIC dummy.cpp)
+set_target_properties(democpplib_static PROPERTIES
+    OUTPUT_NAME "democpp")
+target_link_libraries(democpplib_static democpplib demolib_static)
+
+add_library(democpplib_shared SHARED dummy.cpp)
+set_target_properties(democpplib_shared PROPERTIES
+    OUTPUT_NAME "democpp"
+    VERSION 0.0.1
+    SOVERSION 0)
+target_link_libraries(democpplib_shared democpplib demolib_shared)

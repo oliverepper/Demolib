@@ -5,7 +5,8 @@ generate_export_header(demolib BASE_NAME "demo")
 
 target_include_directories(demolib
     PUBLIC
-        include
+        "include"
+        "include/demo"
         ${CMAKE_CURRENT_BINARY_DIR})
 
 set(demolib_PUBLIC_HEADERS

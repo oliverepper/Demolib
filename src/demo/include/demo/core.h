@@ -4,7 +4,7 @@
 #include <demo/types.h>
 #include <demo_export.h>
 
-#ifdef __cpluscplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
