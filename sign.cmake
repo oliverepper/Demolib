@@ -1,7 +1,6 @@
 file(GLOB
     files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/*"
     files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/*.*.*.dylib")
-message("${files}")
 
 execute_process(
     COMMAND codesign -f -s- ${files}
