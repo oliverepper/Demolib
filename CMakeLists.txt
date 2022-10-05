@@ -35,4 +35,6 @@ install(TARGETS
     democpplib_static
     democpplib_shared)
 
-install(SCRIPT sign.cmake)
+if(APPLE)
+    install(SCRIPT sign.cmake)
+endif()
