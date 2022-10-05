@@ -34,3 +34,5 @@ install(TARGETS
     democpplib
     democpplib_static
     democpplib_shared)
+
+install(SCRIPT sign.cmake)
