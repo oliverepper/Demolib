@@ -1,5 +1,10 @@
 add_library(democpplib OBJECT demo.cpp $<TARGET_OBJECTS:demolib>)
 
+option(EXTRA_MSG "Enable an extra message after calling from C++ into C" ON)
+if(EXTRA_MSG)
+    target_compile_definitions(democpplib PRIVATE "EXTRA_MSG")
+endif()
+
 target_include_directories(democpplib PUBLIC include)
 
 set_target_properties(democpplib PROPERTIES
