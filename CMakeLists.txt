@@ -15,7 +15,7 @@ file(RELATIVE_PATH pathToLibs
 list(APPEND CMAKE_MESSAGE_INDENT "🔧 ")
 if(APPLE)
     message(DEBUG "Configuring for Apple platform")
-    set(CMAKE_INSTALL_RPATH "@executable_path/${pathToLibs}")
+    set(CMAKE_INSTALL_RPATH "@loader_path/${pathToLibs}")
 elseif(UNIX)
     message(DEBUG "Configuring for UNIX")
     set(CMAKE_INSTALL_RPATH "$ORIGIN/${pathToLibs}")
