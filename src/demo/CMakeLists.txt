@@ -5,9 +5,10 @@ generate_export_header(demolib BASE_NAME "demo")
 
 target_include_directories(demolib
     PUBLIC
-        "include"
-        "include/demo"
-        ${CMAKE_CURRENT_BINARY_DIR})
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/demo>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+        $<INSTALL_INTERFACE:include>)
 
 set(demolib_PUBLIC_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/demo.h
@@ -24,8 +25,6 @@ set_target_properties(demolib_static PROPERTIES
     OUTPUT_NAME "demo")
 target_link_libraries(demolib_static demolib)
 
-# Xcode generator needs at least one file for a target
-# only object files does not work :-/
 add_library(demolib_shared SHARED dummy.c)
 set_target_properties(demolib_shared PROPERTIES
     OUTPUT_NAME "demo"

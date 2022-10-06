@@ -15,7 +15,7 @@ file(RELATIVE_PATH pathToLibs
 list(APPEND CMAKE_MESSAGE_INDENT "🔧 ")
 if(APPLE)
     message(DEBUG "Configuring for Apple platform")
-    set(CMAKE_INSTALL_RPATH "@executable_path/${pathToLibs}")
+    set(CMAKE_INSTALL_RPATH "@loader_path/${pathToLibs}")
 elseif(UNIX)
     message(DEBUG "Configuring for UNIX")
     set(CMAKE_INSTALL_RPATH "$ORIGIN/${pathToLibs}")
@@ -25,20 +25,51 @@ list(POP_BACK CMAKE_MESSAGE_INDENT)
 
 add_subdirectory(src bin)
 
+set(demolib_EXPORTED_TARGETS
+demolib
+demolib_shared
+democpplib
+democpplib_shared)
+
+install(TARGETS ${demolib_EXPORTED_TARGETS}
+    EXPORT DemoLibTargets
+    LIBRARY NAMELINK_SKIP)
+
+install(EXPORT DemoLibTargets
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DemoLib-${PROJECT_VERSION}
+    NAMESPACE demolib::)
+
+install(TARGETS ${demolib_EXPORTED_TARGETS})
+
 install(TARGETS
+    demolib_static
     c-demo-objfiles
     c-demo-static
     c-demo-shared
-    demolib
-    demolib_static
-    demolib_shared
+    democpplib_static
     cpp-demo-objfiles
     cpp-demo-static
-    cpp-demo-shared
-    democpplib
-    democpplib_static
-    democpplib_shared)
+    cpp-demo-shared)
 
 if(APPLE)
-    install(SCRIPT sign.cmake)
+    install(SCRIPT ${PROJECT_SOURCE_DIR}/cmake/sign.cmake)
 endif()
+
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+    "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in"
+    "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    INSTALL_DESTINATION
+    ${CMAKE_INSTALL_LIBDIR}/cmake/DemoLib-${PROJECT_VERSION})
+
+write_basic_package_version_file(
+    "${PROJECT_NAME}ConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+    DESTINATION
+    ${CMAKE_INSTALL_LIBDIR}/cmake/DemoLib-${PROJECT_VERSION})
+

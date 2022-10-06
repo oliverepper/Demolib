@@ -5,13 +5,16 @@ if(EXTRA_MSG)
     target_compile_definitions(democpplib PRIVATE "EXTRA_MSG")
 endif()
 
-target_include_directories(democpplib PUBLIC include)
+target_include_directories(democpplib
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>)
 
 set_target_properties(democpplib PROPERTIES
     PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/include/demo.hpp"
     POSITION_INDEPENDENT_CODE true)
 
-target_link_libraries(democpplib PUBLIC demolib_static)
+target_link_libraries(democpplib PUBLIC demolib)
 
 add_library(democpplib_static STATIC dummy.cpp)
 set_target_properties(democpplib_static PROPERTIES
