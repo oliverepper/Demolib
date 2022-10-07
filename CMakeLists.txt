@@ -25,16 +25,21 @@ list(POP_BACK CMAKE_MESSAGE_INDENT)
 
 add_subdirectory(src bin)
 
-install(TARGETS
-    demolib
-    demolib_shared
-    democpplib
-    democpplib_shared
-    EXPORT DemoLibTargets)
+set(demolib_EXPORTED_TARGETS
+demolib
+demolib_shared
+democpplib
+democpplib_shared)
+
+install(TARGETS ${demolib_EXPORTED_TARGETS}
+    EXPORT DemoLibTargets
+    LIBRARY NAMELINK_SKIP)
 
 install(EXPORT DemoLibTargets
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DemoLib-${PROJECT_VERSION}
     NAMESPACE demolib::)
+
+install(TARGETS ${demolib_EXPORTED_TARGETS})
 
 install(TARGETS
     demolib_static
