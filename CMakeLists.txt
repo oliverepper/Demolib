@@ -37,7 +37,12 @@ install(TARGETS
     cpp-demo-shared
     democpplib
     democpplib_static
-    democpplib_shared)
+    democpplib_shared
+    EXPORT DemoLibTargets)
+
+install(EXPORT DemoLibTargets
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DemoLib-${PROJECT_VERSION}
+    NAMESPACE demolib::)
 
 if(APPLE)
     install(SCRIPT sign.cmake)
