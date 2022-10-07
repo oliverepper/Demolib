@@ -8,7 +8,7 @@ add_executable(c-demo-shared main.c)
 target_link_libraries(c-demo-shared PRIVATE demolib_shared)
 
 add_executable(cpp-demo-objfiles main.cpp)
-target_link_libraries(cpp-demo-objfiles PRIVATE democpplib)
+target_link_libraries(cpp-demo-objfiles PRIVATE democpplib demolib)
 
 add_executable(cpp-demo-static main.cpp)
 target_link_libraries(cpp-demo-static PRIVATE democpplib_static)

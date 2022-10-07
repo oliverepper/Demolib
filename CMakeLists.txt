@@ -26,23 +26,25 @@ list(POP_BACK CMAKE_MESSAGE_INDENT)
 add_subdirectory(src bin)
 
 install(TARGETS
-    c-demo-objfiles
-    c-demo-static
-    c-demo-shared
     demolib
-    demolib_static
     demolib_shared
-    cpp-demo-objfiles
-    cpp-demo-static
-    cpp-demo-shared
     democpplib
-    democpplib_static
     democpplib_shared
     EXPORT DemoLibTargets)
 
 install(EXPORT DemoLibTargets
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DemoLib-${PROJECT_VERSION}
     NAMESPACE demolib::)
+
+install(TARGETS
+    demolib_static
+    c-demo-objfiles
+    c-demo-static
+    c-demo-shared
+    democpplib_static
+    cpp-demo-objfiles
+    cpp-demo-static
+    cpp-demo-shared)
 
 if(APPLE)
     install(SCRIPT sign.cmake)
