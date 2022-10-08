@@ -7,3 +7,7 @@ void side_effect_for(const enum demo_case x) {
     else
         printf("B\n");
 }
+
+int demo_sum(int a, int b) {
+    return a + b;
+}

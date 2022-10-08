@@ -9,6 +9,7 @@ extern "C" {
 #endif
 
 DEMO_EXPORT void side_effect_for(const enum demo_case);
+DEMO_EXPORT int demo_sum(int, int);
 
 #ifdef __cplusplus
 }
