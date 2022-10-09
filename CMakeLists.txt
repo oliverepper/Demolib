@@ -49,7 +49,8 @@ install(TARGETS
     democpplib_static
     cpp-demo-objfiles
     cpp-demo-static
-    cpp-demo-shared)
+    cpp-demo-shared
+    BUNDLE DESTINATION ${CMAKE_INSTALL_LIBEXECDIR})
 
 if(APPLE)
     install(SCRIPT ${PROJECT_SOURCE_DIR}/cmake/sign.cmake)
